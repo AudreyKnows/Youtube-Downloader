@@ -2,35 +2,23 @@ from pytube import YouTube
 import streamlit as st
 import os
 import re
-import base64
 
 
 directory= 'downloads/'
 if not os.path.exists(directory):
     os.makedirs(directory)
     
-
 st.set_page_config(page_title="Audrey Knows cloud ", page_icon=":cloud:", layout="wide", )     
-st.subheader("Welcome to Audrey Knows Cloud 🍋")
-
-def add_bg_from_local(image_file):
-    with open(image_file, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read())
-    st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url(data:image/{"jpg"};base64,{encoded_string.decode()});
-        background-size: cover
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
-add_bg_from_local('estudio-bloom-ezqnxsqUZ80-unsplash (1).jpg')
-
-@st.cache(allow_output_mutation=True)
-
+st.subheader("Youtube Downloaderstreamlit run main.py")
+st.markdown(f"""
+            <style>
+            .stApp {{background-image: url("https://drey-knows-cloud.s3.amazonaws.com/still-life-photography-shot-lemon-slices-falling-water-making-big-splash.jpg")
+                     background-attachment: fixed;
+                     background-size: cover}}
+         </style>
+         """, unsafe_allow_html=True)
+         
+st.cache(allow_output_mutation=True)
 def get_info(url):
     yt = YouTube(url)
     streams= yt.streams.filter(progressive= True, type= 'video')
@@ -54,7 +42,8 @@ def get_info(url):
     details["fps"]= frate
     details["format"]= vformat
     return details
-st.title("YouTube Downloader")
+    
+st.title("YouTube Downloader 🍋")
 url = st.text_input("Paste URL here 🍋", placeholder='https://www.youtube.com/')
 if url:
     v_info= get_info(url)
@@ -88,15 +77,3 @@ if url:
                     st.balloons()
                 except:
                     st.error('Error: Save with a different name!', icon="⚠")
-                  
-      
-    
-
-        
-        
-
-
-    
-      
-      
-  
